@@ -7,7 +7,7 @@
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/drawable-v24/edit_text_background.xml" value="0.14322916666666666" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/drawable-v24/title_background.xml" value="0.14322916666666666" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14322916666666666" />
-        <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_destination_details.xml" value="0.12708333333333333" />
+        <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_destination_details.xml" value="0.2" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_main_menu.xml" value="0.12708333333333333" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_register.xml" value="0.12708333333333333" />
@@ -15,6 +15,7 @@
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/fragment_destinations_index.xml" value="0.11302083333333333" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/fragment_destinations_index2.xml" value="0.12708333333333333" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/fragment_new_destination.xml" value="0.12708333333333333" />
+        <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/fragment_reservations_index.xml" value="0.12760416666666666" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/menu/bottom_nav_menu.xml" value="0.12708333333333333" />
       </map>
     </option>

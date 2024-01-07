@@ -1,6 +1,7 @@
 package com.example.tourismagency.Helper;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tourismagency.DestinationDetails;
 import com.example.tourismagency.FirebaseHelper.Destination;
 import com.example.tourismagency.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -91,6 +93,9 @@ public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.
                         //Use shared preferences to store the item last clicked
                         SharedPreferences sharedPreferences = context.getSharedPreferences("com.example.tourismagency", Context.MODE_PRIVATE);
                         sharedPreferences.edit().putString("last destination clicked", destination.getId()).apply();
+                        //Start the destination details activity
+                        Intent newDestinationIntent = new Intent(context, DestinationDetails.class);
+                        context.startActivity(newDestinationIntent);
                     }
                 });
             }else{

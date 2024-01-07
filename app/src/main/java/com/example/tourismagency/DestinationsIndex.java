@@ -92,21 +92,11 @@ public class DestinationsIndex extends Fragment {
                         destinationNames.add(destination.getTitle());
                     }
 
-                    // De bagat toate alea in array adapter
                     DestinationAdapter adapter = new DestinationAdapter(destinations);
                     destinationsList.setAdapter(adapter);
                 }
             }
         });
         destinationsList.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        //De gasit destinatia pe care s-a dat click
-        MainMenu mainMenu = (MainMenu) getActivity();
-        /*SharedPreferences sharedPreferences =mainMenu.getApplicationContext().getSharedPreferences("com.example.tourismagency", Context.MODE_PRIVATE);
-        int destinationIndex = sharedPreferences.getInt("last destination clicked", -1);
-        Log.i("destinationIndex", Integer.toString(destinationIndex));
-        Destination currentDestination = destinations.get(destinationIndex);
-        Log.i("current destionation", currentDestination.getId());
-        Log.i("current destionation", currentDestination.getTitle());*/
-
     }
 }
