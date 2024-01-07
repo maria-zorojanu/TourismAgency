@@ -33,6 +33,7 @@ public class DestinationDetails extends AppCompatActivity {
     Button btnRating;
     Button btnNewReservation;
     String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +59,8 @@ public class DestinationDetails extends AppCompatActivity {
                     //Check if the user can save or modify a destination
                     btnSaveDestination = findViewById(R.id.btnSaveDestination);
                     btnDeleteDestination = findViewById(R.id.btnDeleteDestination);
-                    btnRating = findViewById(R.id.btnDeleteDestination);
-                    btnNewReservation = findViewById(R.id.btnDeleteDestination);
+                    btnRating = findViewById(R.id.btnRating);
+                    btnNewReservation = findViewById(R.id.btnNewReservation);
                     if(admin)
                     {
                         btnSaveDestination.setOnClickListener(this::saveDestination);
@@ -152,7 +153,9 @@ public class DestinationDetails extends AppCompatActivity {
             }
             private void Rating(View view)
             {
-
+                Log.i("reviwe intent", "start");
+                Intent reviewIntent = new Intent(getApplicationContext(), Review.class);
+                startActivity(reviewIntent);
             }
 
         });
