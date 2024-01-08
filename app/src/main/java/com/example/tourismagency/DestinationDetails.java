@@ -149,11 +149,12 @@ public class DestinationDetails extends AppCompatActivity {
 
             private void Reservation(View view)
             {
-
+                Intent reservationIntent = new Intent(getApplicationContext(), CreateReservation.class);
+                startActivity(reservationIntent);
             }
+
             private void Rating(View view)
             {
-                Log.i("reviwe intent", "start");
                 Intent reviewIntent = new Intent(getApplicationContext(), Review.class);
                 startActivity(reviewIntent);
             }
