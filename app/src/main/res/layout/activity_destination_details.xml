@@ -12,7 +12,7 @@
         android:layout_width="209dp"
         android:layout_height="45dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="100dp"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +42,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="wrap_content"
             android:hint="Details" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -52,7 +52,7 @@
         android:layout_width="58dp"
         android:layout_height="19dp"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="100dp"
         android:text="Price"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="30dp"
         android:text="Book"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.181"
@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="30dp"
         android:text="Review"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="30dp"
         android:text="See rating"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnNewReservation"

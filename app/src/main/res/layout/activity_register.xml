@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="100dp"
         android:gravity="center_horizontal"
         android:text="Register"
@@ -28,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="35dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
@@ -45,7 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="35dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
@@ -54,7 +54,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
@@ -62,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="77dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="35dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
@@ -71,31 +71,30 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Switch
         android:id="@+id/adminSwitch"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
         android:text="Admin"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck"
+        android:textSize="20dp"/>
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/button_background"
         android:onClick="register"
         android:text="Register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

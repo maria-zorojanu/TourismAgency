@@ -8,11 +8,11 @@
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/drawable-v24/title_background.xml" value="0.14322916666666666" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14322916666666666" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_create_reservation.xml" value="0.264" />
-        <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_destination_details.xml" value="0.2" />
-        <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
+        <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_destination_details.xml" value="0.12" />
+        <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_main.xml" value="0.16799999999999998" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_main_menu.xml" value="0.12708333333333333" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_register.xml" value="0.12708333333333333" />
-        <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_review.xml" value="0.176" />
+        <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_review.xml" value="0.136" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/activity_reviews_index.xml" value="0.12760416666666666" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/destination_adapter.xml" value="0.12708333333333333" />
         <entry key="..\:/Cursuri/Android_dev/apps/TourismAgency/app/src/main/res/layout/fragment_destinations_index.xml" value="0.11302083333333333" />
