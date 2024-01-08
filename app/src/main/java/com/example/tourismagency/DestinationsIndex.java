@@ -32,6 +32,7 @@ public class DestinationsIndex extends Fragment {
      Button bntNewDestination;
      View myView;
      FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    SharedPreferences sharedPreferences;
     public DestinationsIndex() {
         // Required empty public constructor
     }
@@ -56,21 +57,37 @@ public class DestinationsIndex extends Fragment {
         // Inflate the layout for this fragment
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.fragment_destinations_index, container, false);
-        bntNewDestination = (Button) myView.findViewById(R.id.btnNewDestination);
-        bntNewDestination.setOnClickListener(this::newDestination);
+        MainMenu mainMenu = (MainMenu) getActivity();
+        sharedPreferences =mainMenu.getApplicationContext().getSharedPreferences("com.example.tourismagency", Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("uid", "-1");
+        DatabaseReference databaseReference = firebaseDatabase.getReference("AdminUsers").child(userId);
+        databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(Task<DataSnapshot> task) {
+                DataSnapshot dataSnapshot = task.getResult();
+                if(dataSnapshot.exists())
+                {
+                    Boolean admin = (Boolean) dataSnapshot.getValue();
+                    bntNewDestination = (Button) myView.findViewById(R.id.btnNewDestination);
+                    if(admin){
+                        bntNewDestination.setOnClickListener(this::newDestination);
+                    }else{
+                        bntNewDestination.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+            }
+            private void newDestination(View view)
+            {
+                sharedPreferences.edit().putString("last destination clicked", "").apply();
+                Intent newDestinationIntent = new Intent(getContext(), DestinationDetails.class);
+                startActivity(newDestinationIntent);
+            }
+        });
+
         getAllDestinations();
         return myView;
     }
-
-    private void newDestination(View view)
-    {
-        MainMenu mainMenu = (MainMenu) getActivity();
-        SharedPreferences sharedPreferences =mainMenu.getApplicationContext().getSharedPreferences("com.example.tourismagency", Context.MODE_PRIVATE);
-        sharedPreferences.edit().putString("last destination clicked", "").apply();
-        Intent newDestinationIntent = new Intent(getContext(), DestinationDetails.class);
-        startActivity(newDestinationIntent);
-    }
-
 
     public  void getAllDestinations()
     {

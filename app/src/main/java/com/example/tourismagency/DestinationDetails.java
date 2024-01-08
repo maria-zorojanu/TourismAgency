@@ -186,4 +186,8 @@ public class DestinationDetails extends AppCompatActivity {
         });
     }
 
+    public void otherReviews(View view) {
+        Intent reviewIndexIntent = new Intent(getApplicationContext(), ReviewsIndex.class);
+        startActivity(reviewIndexIntent);
+    }
 }

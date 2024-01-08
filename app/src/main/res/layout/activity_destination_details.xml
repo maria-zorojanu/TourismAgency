@@ -61,23 +61,22 @@
         android:id="@+id/btnSaveDestination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="15dp"
         android:layout_marginBottom="44dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.181"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="DuplicateClickableBoundsCheck" />
 
     <Button
         android:id="@+id/btnNewReservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="15dp"
         android:layout_marginBottom="44dp"
         android:text="Book"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.181"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -85,24 +84,38 @@
         android:id="@+id/btnDeleteDestination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginBottom="44dp"
+        android:layout_marginEnd="30dp"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.815"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:ignore="DuplicateClickableBoundsCheck" />
 
     <Button
         android:id="@+id/btnRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="44dp"
         android:text="Review"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.815"
-        app:layout_constraintStart_toStartOf="parent" />
+         />
+
+    <Button
+        android:id="@+id/btnAllReviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="44dp"
+        android:text="See rating"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnNewReservation"
+        app:layout_constraintEnd_toStartOf="@+id/btnRating"
+        android:onClick="otherReviews"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

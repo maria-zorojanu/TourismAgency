@@ -30,7 +30,7 @@ public class Review extends AppCompatActivity {
     }
 
     public void saveReview(View view) {
-        sharedPreferences = sharedPreferences = getApplicationContext().getSharedPreferences("com.example.tourismagency", Context.MODE_PRIVATE);
+        sharedPreferences  = getApplicationContext().getSharedPreferences("com.example.tourismagency", Context.MODE_PRIVATE);
         String userId = sharedPreferences.getString("uid", "");
         String destinationId = sharedPreferences.getString("last destination clicked", "");
         Log.i("uid", userId);
@@ -96,5 +96,10 @@ public class Review extends AppCompatActivity {
                 break;
         }
 
+    }
+
+    public void otherReviews(View view) {
+        Intent reviewIndexIntent = new Intent(getApplicationContext(), ReviewsIndex.class);
+        startActivity(reviewIndexIntent);
     }
 }
