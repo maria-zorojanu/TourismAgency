@@ -48,68 +48,74 @@ public class CreateReservation extends AppCompatActivity {
 
         int fromDate = checkDateFormat(etFromDate.getText().toString());
         int finalDate = checkDateFormat(etFinalDate.getText().toString());
+        Boolean ok = true;
         if(fromDate == 0 || finalDate == 0 || fromDate>finalDate){
+            ok = false;
             Toast.makeText(getApplicationContext(),"Please enter valid dates", Toast.LENGTH_SHORT).show();
         }
 
-        String userId = sharedPreferences.getString("uid", "");
-        String destinationId = sharedPreferences.getString("last destination clicked", "");
+        if(ok) {
+            String userId = sharedPreferences.getString("uid", "");
+            String destinationId = sharedPreferences.getString("last destination clicked", "");
 
-        DatabaseReference reservationRef = firebaseDatabase.getReference("Reservations").child(destinationId);
-        reservationRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @TargetApi(Build.VERSION_CODES.O)
-            @Override
-            public void onComplete(Task<DataSnapshot> task) {
-                Log.i("reservations onComplete", "ok");
-                DataSnapshot data = task.getResult();
-                Boolean ok = true;
-                if(data.exists()){
-                    Log.i("data exists", "ok");
-                    for(DataSnapshot ds: data.getChildren()){
-                        Reservations reservation = new Reservations();
-                        reservation = (Reservations) ds.getValue(Reservations.class);
+            DatabaseReference reservationRef = firebaseDatabase.getReference("Reservations").child(destinationId);
+            reservationRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @TargetApi(Build.VERSION_CODES.O)
+                @Override
+                public void onComplete(Task<DataSnapshot> task) {
+                    Log.i("reservations onComplete", "ok");
+                    DataSnapshot data = task.getResult();
+                    Boolean ok = true;
+                    if (data.exists()) {
+                        Log.i("data exists", "ok");
+                        for (DataSnapshot ds : data.getChildren()) {
+                            Reservations reservation = new Reservations();
+                            reservation = (Reservations) ds.getValue(Reservations.class);
 
-                        if((fromDate >= reservation.getStartDate() && fromDate <= reservation.getFinalDate()) ||
-                                finalDate >= reservation.getStartDate() && finalDate <= reservation.getFinalDate())
-                        {
-                            Toast.makeText(getApplicationContext(), "The interval is not available", Toast.LENGTH_SHORT).show();
-                            ok = false;
+                            if ((fromDate >= reservation.getStartDate() && fromDate <= reservation.getFinalDate()) ||
+                                    finalDate >= reservation.getStartDate() && finalDate <= reservation.getFinalDate()
+                                    || (fromDate <= reservation.getStartDate() && finalDate >= reservation.getFinalDate())) {
+                                Toast.makeText(getApplicationContext(), "The interval is not available", Toast.LENGTH_SHORT).show();
+                                ok = false;
+                            }
+
+
                         }
                     }
+                    Log.i("reservations status", ok.toString());
+                    if (ok) {
+                        Reservations reservation = new Reservations(userId, destinationId, fromDate, finalDate);
+                        DatabaseReference dataRef = firebaseDatabase.getReference("Reservations").child(destinationId);
+
+                        String key = firebaseDatabase.getReference("Reservations").push().getKey();
+                        dataRef.child(key).setValue(reservation);
+                        Log.i("reservations id", key);
+                        Toast.makeText(getApplicationContext(), "Reservation saved", Toast.LENGTH_SHORT).show();
+
+                        //Go back to index
+                        sharedPreferences.edit().putString("last destination clicked", "").apply();
+                        Intent mainMenuIntent = new Intent(getApplicationContext(), MainMenu.class);
+                        startActivity(mainMenuIntent);
+
+                        //Notification
+                        String messagesChannelId = "Reservations";
+                        NotificationChannel messagesChannel = new NotificationChannel(messagesChannelId, "reservation notifications", NotificationManager.IMPORTANCE_HIGH);
+
+                        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                        notificationManager.createNotificationChannel(messagesChannel);
+
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), messagesChannelId)
+                                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                                .setContentTitle("New reservation")
+                                .setContentText("You have a new reservation")
+                                .setPriority(NotificationCompat.PRIORITY_HIGH);
+                        // Show the notification
+                        //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+                        notificationManager.notify(1, builder.build());
+                    }
                 }
-                Log.i("reservations status", ok.toString());
-                if(ok){
-                    Reservations reservation = new Reservations(userId, destinationId, fromDate, finalDate);
-                    DatabaseReference dataRef = firebaseDatabase.getReference("Reservations").child(destinationId);
-
-                    String key = firebaseDatabase.getReference("Reservations").push().getKey();
-                    dataRef.child(key).setValue(reservation);
-                    Log.i("reservations id", key);
-                    Toast.makeText(getApplicationContext(), "Reservation saved", Toast.LENGTH_SHORT).show();
-
-                    //Go back to index
-                    sharedPreferences.edit().putString("last destination clicked", "").apply();
-                    Intent mainMenuIntent = new Intent(getApplicationContext(), MainMenu.class);
-                    startActivity(mainMenuIntent);
-
-                    //Notification
-                    String messagesChannelId = "Reservations";
-                    NotificationChannel messagesChannel = new NotificationChannel(messagesChannelId, "reservation notifications", NotificationManager.IMPORTANCE_HIGH);
-
-                    NotificationManager notificationManager = getSystemService(NotificationManager.class);
-                    notificationManager.createNotificationChannel(messagesChannel);
-
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), messagesChannelId)
-                            .setSmallIcon(R.drawable.ic_launcher_foreground)
-                            .setContentTitle("New reservation")
-                            .setContentText("You have a new reservation")
-                            .setPriority(NotificationCompat.PRIORITY_HIGH);
-                    // Show the notification
-                    //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
-                    notificationManager.notify(1, builder.build());
-                }
-            }
-        });
+            });
+        }
     }
 
     //Return yyyymmdd if a date is valid or 0

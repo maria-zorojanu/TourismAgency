@@ -46,7 +46,7 @@ public class ReviewsIndex extends AppCompatActivity {
             public void onComplete(Task<DataSnapshot> task) {
                 DataSnapshot data = task.getResult();
                 ArrayList<String> dispalyReviews = new ArrayList<>();
-                int totalStars = 0;
+                Float totalStars = 0.0f;
                 float stars;
                 if(data.exists())
                 {

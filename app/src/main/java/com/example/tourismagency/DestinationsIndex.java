@@ -27,9 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DestinationsIndex extends Fragment {
      Button bntNewDestination;
+     Button btnFilterDestination;
      View myView;
      FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     SharedPreferences sharedPreferences;
@@ -69,14 +71,22 @@ public class DestinationsIndex extends Fragment {
                 {
                     Boolean admin = (Boolean) dataSnapshot.getValue();
                     bntNewDestination = (Button) myView.findViewById(R.id.btnNewDestination);
+                    btnFilterDestination = (Button) myView.findViewById(R.id.btnFilterDestination);
                     if(admin){
                         bntNewDestination.setOnClickListener(this::newDestination);
                     }else{
                         bntNewDestination.setVisibility(View.INVISIBLE);
                     }
+                    btnFilterDestination.setOnClickListener(this::filterDestination);
                 }
 
             }
+
+            private void filterDestination(View view) {
+                Intent filterDestinationIntent = new Intent(getContext(), FilterActivity.class);
+                startActivity(filterDestinationIntent);
+            }
+
             private void newDestination(View view)
             {
                 sharedPreferences.edit().putString("last destination clicked", "").apply();
@@ -94,8 +104,20 @@ public class DestinationsIndex extends Fragment {
         RecyclerView destinationsList = myView.findViewById(R.id.rvDestinations);
         List<Destination> destinations = new ArrayList<>();
         ArrayList<String> destinationNames = new ArrayList<>();
+        String minPriceStr = sharedPreferences.getString("minPrice", "-1");
+        String maxPriceStr = sharedPreferences.getString("maxPrice", "-1");
+        String search = sharedPreferences.getString("search", "");
+        Float minPrice = -1.0f, maxPrice = -1.0f;
+        if(minPriceStr.length()>0) {
+            minPrice = Float.valueOf(minPriceStr);
+        }
+        if(maxPriceStr.length()>0) {
+            maxPrice = Float.valueOf(maxPriceStr);
+        }
         DatabaseReference databaseReference = firebaseDatabase.getReference("Destinations");
 
+        Float finalMinPrice = minPrice;
+        Float finalMaxPrice = maxPrice;
         databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(Task<DataSnapshot> task) {
@@ -105,8 +127,23 @@ public class DestinationsIndex extends Fragment {
                     for (DataSnapshot ds : data.getChildren()) {
                         Destination destination = new Destination();
                         destination = ds.getValue(Destination.class);
-                        destinations.add(destination);
-                        destinationNames.add(destination.getTitle());
+                        Boolean ok = true;
+                        if(search.length()>0 && !(destination.getTitle().toUpperCase(Locale.ROOT).indexOf(search.toUpperCase(Locale.ROOT))>=0))
+                        {
+                            ok = false;
+                        }
+                        if(finalMinPrice > -1 && destination.getPrice()< finalMinPrice)
+                        {
+                            ok = false;
+                        }
+                        if(finalMaxPrice > -1 && destination.getPrice()> finalMaxPrice)
+                        {
+                            ok = false;
+                        }
+                        if(ok) {
+                            destinations.add(destination);
+                            destinationNames.add(destination.getTitle());
+                        }
                     }
 
                     DestinationAdapter adapter = new DestinationAdapter(destinations);
