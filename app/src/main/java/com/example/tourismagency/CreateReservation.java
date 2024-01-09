@@ -1,10 +1,16 @@
 package com.example.tourismagency;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.annotation.TargetApi;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,6 +57,7 @@ public class CreateReservation extends AppCompatActivity {
 
         DatabaseReference reservationRef = firebaseDatabase.getReference("Reservations").child(destinationId);
         reservationRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @TargetApi(Build.VERSION_CODES.O)
             @Override
             public void onComplete(Task<DataSnapshot> task) {
                 Log.i("reservations onComplete", "ok");
@@ -84,6 +91,22 @@ public class CreateReservation extends AppCompatActivity {
                     sharedPreferences.edit().putString("last destination clicked", "").apply();
                     Intent mainMenuIntent = new Intent(getApplicationContext(), MainMenu.class);
                     startActivity(mainMenuIntent);
+
+                    //Notification
+                    String messagesChannelId = "Reservations";
+                    NotificationChannel messagesChannel = new NotificationChannel(messagesChannelId, "reservation notifications", NotificationManager.IMPORTANCE_HIGH);
+
+                    NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                    notificationManager.createNotificationChannel(messagesChannel);
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), messagesChannelId)
+                            .setSmallIcon(R.drawable.ic_launcher_foreground)
+                            .setContentTitle("New reservation")
+                            .setContentText("You have a new reservation")
+                            .setPriority(NotificationCompat.PRIORITY_HIGH);
+                    // Show the notification
+                    //NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+                    notificationManager.notify(1, builder.build());
                 }
             }
         });

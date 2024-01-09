@@ -3,11 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ReservationsIndex">
 
     <TextView
+        android:id="@+id/tvReservationsTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="10dp"
+        android:textSize="25dp"
         android:text="Reservations" />
     <Button
         android:id="@+id/deleteUserButton"
@@ -30,5 +35,15 @@
         android:layout_marginEnd="20dp"
         android:onClick="logOut"
         android:text="Log Out" />
+
+    <ListView
+        android:id="@+id/lvReservations"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvReservationsTitle"
+        app:layout_constraintBottom_toTopOf="@+id/logOutButton"
+        />
 
 </FrameLayout>
